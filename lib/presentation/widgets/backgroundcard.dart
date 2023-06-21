@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:netflix/domain/apiendpoint.dart';
+import 'package:netflix/infrastructure/apikey.dart';
 import 'package:netflix/infrastructure/base_client.dart';
 import 'package:netflix/presentation/widgets/playbutton.dart';
 
@@ -30,7 +31,7 @@ class _BackgroundCardState extends State<BackgroundCard> {
       if (result.results.isNotEmpty) {
         MovieInfoModel movieInfo = result.results[0];
         imageUrl =
-            "https://image.tmdb.org/t/p/w500${movieInfo.posterPath}?api_key=b2dee3b855c4ea705ff5dda3c0201768";
+            "https://image.tmdb.org/t/p/w500${movieInfo.posterPath}?api_key=$apikey";
       }
     });
   }

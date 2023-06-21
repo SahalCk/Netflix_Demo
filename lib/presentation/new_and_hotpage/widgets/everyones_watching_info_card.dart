@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:netflix/infrastructure/apikey.dart';
 
 import '../../../core/colors/colors.dart';
 import '../../../core/constants/constant.dart';
@@ -13,7 +14,7 @@ class EveryonesWatchingInfoCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     String imageUrl =
-        'https://image.tmdb.org/t/p/w500${movieInfo.posterPath}?api_key=b2dee3b855c4ea705ff5dda3c0201768';
+        'https://image.tmdb.org/t/p/w500${movieInfo.posterPath}?api_key=$apikey';
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Column(

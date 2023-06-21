@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:netflix/domain/apiendpoint.dart';
+import 'package:netflix/infrastructure/apikey.dart';
 import 'package:netflix/infrastructure/base_client.dart';
 import 'package:netflix/model/movie_info.dart';
 import 'package:netflix/presentation/search/widgets/titlewidget.dart';
@@ -60,16 +61,17 @@ class TopSearchItemTile extends StatelessWidget {
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     String url =
-        'https://image.tmdb.org/t/p/w500${movieInfo.posterPath}?api_key=6675903d4afda1fc8eb3c5205237de1a';
+        'https://image.tmdb.org/t/p/w500${movieInfo.posterPath}?api_key=$apikey';
 
     return Row(
       children: [
         Container(
           width: screenWidth * 0.35,
-          height: 65,
+          height: 70,
           decoration: BoxDecoration(
               image:
-                  DecorationImage(image: NetworkImage(url), fit: BoxFit.cover)),
+                  DecorationImage(image: NetworkImage(url), fit: BoxFit.cover),
+              borderRadius: BorderRadius.circular(2)),
         ),
         kWidth,
         Expanded(

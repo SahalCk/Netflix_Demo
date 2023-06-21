@@ -1,6 +1,6 @@
-
 import 'package:flutter/material.dart';
 import 'package:netflix/domain/apiendpoint.dart';
+import 'package:netflix/infrastructure/apikey.dart';
 import 'package:netflix/infrastructure/base_client.dart';
 import 'package:netflix/presentation/widgets/title_widget.dart';
 
@@ -18,35 +18,37 @@ class NumberTitleMovieCard extends StatelessWidget {
     List imageList = [];
 
     return FutureBuilder(
-        future:apicall(ApiEndPoints.tvtoprate),
+        future: apicall(ApiEndPoints.tvtoprate),
         builder: (context, snapshot) {
           if (!snapshot.hasData) {
             return const Center(
-                      child: Column(
-                        children: [
-                          CircularProgressIndicator(color: Colors.blue,),
-                          Text('Please wait'),
-                        ],
-                      ),
-                    );
+              child: Column(
+                children: [
+                  CircularProgressIndicator(
+                    color: Colors.blue,
+                  ),
+                  Text('Please wait'),
+                ],
+              ),
+            );
           }
 
           if (snapshot.data == null) {
-            return const Center(child:  Text('No data found'));
+            return const Center(child: Text('No data found'));
           }
-          
 
-            imageList = snapshot.data.results.map((MovieInfoModel movieInfo) {
-              if (movieInfo.posterPath == null) {
-                return null;
-              }
-              String imageUrl =
-                  'https://image.tmdb.org/t/p/w500${movieInfo.posterPath}?api_key=b2dee3b855c4ea705ff5dda3c0201768';
-              return imageUrl;
-            }).toList();
-          
+          imageList = snapshot.data.results.map((MovieInfoModel movieInfo) {
+            if (movieInfo.posterPath == null) {
+              return null;
+            }
+            String imageUrl =
+                'https://image.tmdb.org/t/p/w500${movieInfo.posterPath}?api_key=$apikey';
+            return imageUrl;
+          }).toList();
+
           if (imageList.isEmpty) {
-            return const Center(child: ListTile(title: Text('No Movies Found')));
+            return const Center(
+                child: ListTile(title: Text('No Movies Found')));
           }
 
           return Column(
